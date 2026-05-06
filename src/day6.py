@@ -33,7 +33,33 @@ def part1(input_file):
         configuration = tuple(banks)
 
     return len(seen_configurations)
+
+
+def part2(input_file):
+    seen_configurations = []
+
+    with open(input_file, 'r') as f:
+        banks = list(map(int, f.readline().split()))
+        
+    configuration = tuple(banks)
+    while configuration not in seen_configurations:
+        seen_configurations.append(configuration)
+
+        selected_bank = select_bank(banks)
+        nb_blocks = banks[selected_bank]
+        banks[selected_bank] = 0
+
+        i = (selected_bank + 1) % len(banks)
+        while nb_blocks > 0:
+            banks[i] += 1
+            i = (i + 1) % len(banks)
+            nb_blocks -= 1
+
+        configuration = tuple(banks)
+
+    return len(seen_configurations) - seen_configurations.index(configuration)
         
 
 
 print(part1("input\\day6.txt"))
+print(part2("input\\day6.txt"))
