@@ -10,4 +10,17 @@ def part1(input_file):
             total += sequence[i]
     return total
 
+
+def part2(input_file):
+    with open(input_file, 'r') as f:
+        sequence = list(map(int, f.readline().strip()))
+
+    total = 0
+    step = len(sequence) // 2
+    for i in range(len(sequence)):
+        if sequence[i] == sequence[(i + step) % len(sequence)]:
+            total += sequence[i]
+    return total
+
 print(part1("input\\day1.txt"))
+print(part2("input\\day1.txt"))
