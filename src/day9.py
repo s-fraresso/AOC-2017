@@ -6,8 +6,8 @@ def part1(input_file):
     current_score = 0
 
     i = 0
-    is_garbage = False
-    is_cancelled = False
+    is_garbage = is_cancelled = False
+
     while i < len(stream):
         if is_cancelled:
             is_cancelled = False
@@ -34,10 +34,8 @@ def part2(input_file):
         stream = f.readline().strip()
 
     nb_garbage = 0
-
     i = 0
-    is_garbage = False
-    is_cancelled = False
+    is_garbage = is_cancelled = False
     while i < len(stream):
         if is_cancelled:
             is_cancelled = False
