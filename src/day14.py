@@ -18,31 +18,25 @@ def knot_hash(keystring):
     for _ in range(64):
         pos, skip = tie_knot(circle, lengths, pos, skip)
 
-    knot_hash = ""
+    hsh = ""
     for i in range(16):
         cur_dense = circle[16 * i]
         for j in range(1, 16):
             cur_dense ^= circle[16 * i + j]
         
-        knot_hash += hex(cur_dense)[2:].zfill(2)
+        hsh += hex(cur_dense)[2:].zfill(2)
 
-    return knot_hash
-
-
-def part1(input_file):
-    with open(input_file, 'r') as f:
-        lengths = list(map(int, f.readline().strip().split(",")))
-
-    circle = list(range(256))
-    tie_knot(circle, lengths, 0, 0)
-
-    return circle[0] * circle[1]
+    return hsh
 
 
-def part2(input_file):
-    with open(input_file, 'r') as f:
-        return knot_hash(f.readline().strip())
-    
+def part1(keystring):
+    nb_used = 0
 
-print(part1("input\\day10.txt"))
-print(part2("input\\day10.txt"))
+    for row in range(128):
+        hsh = knot_hash(keystring + "-" + str(row))
+        nb_used += int(hsh, 16).bit_count()
+
+    return nb_used
+
+
+print(part1("stpzcrnm"))
