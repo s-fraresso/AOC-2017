@@ -25,6 +25,12 @@ def dance_once(dance_moves, program_string):
 def part1(input_file):
     with open(input_file, 'r') as f:
         dance_moves = f.readline().strip().split(',')
+    return dance_once(dance_moves, "".join(map(chr, range(ord("a"), ord("a") + NB_PROG))))
+
+
+def part2(input_file):
+    with open(input_file, 'r') as f:
+        dance_moves = f.readline().strip().split(',')
     
     
     program_string = "".join(map(chr, range(ord("a"), ord("a") + NB_PROG)))
@@ -37,6 +43,5 @@ def part1(input_file):
     return seen_strings[1_000_000_000 % len(seen_strings)]
 
 
-
-
 print(part1("input\\day16.txt"))
+print(part2("input\\day16.txt"))
