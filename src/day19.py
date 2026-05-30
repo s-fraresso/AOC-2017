@@ -31,4 +31,37 @@ def part1(input_file):
     return path
 
 
+def part2(input_file):
+    with open(input_file, 'r') as f:
+        maze = [line[:-1] for line in f.readlines()]
+
+    nb_steps = 0
+    diri = 1
+    dirj = 0
+    i = 0
+    j = maze[0].index('|')
+
+    while maze[i][j] != ' ':
+        if maze[i][j] == '+':
+            if diri == 0:
+                if maze[i + 1][j] != ' ':
+                    diri = 1
+                else:
+                    diri = -1
+                dirj = 0
+            else:
+                if maze[i][j + 1] != ' ':
+                    dirj = 1
+                else:
+                    dirj = -1
+                diri = 0 
+        
+        i += diri
+        j += dirj
+        nb_steps += 1
+
+    return nb_steps
+
+
 print(part1("input\\day19.txt"))
+print(part2("input\\day19.txt"))
